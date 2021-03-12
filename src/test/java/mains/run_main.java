@@ -1,4 +1,4 @@
-package main;
+package mains;
 
 
 import com.NopCommerce.utils.ReadConfig;
