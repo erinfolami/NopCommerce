@@ -44,13 +44,11 @@ public class BaseClass {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + readConfig.get_chromepath());
             this.driver = new ChromeDriver();
             logger.info("Starting Chrome Driver");
-        }
-        else if (br.equals("firefox")){
+        } else if (br.equals("firefox")) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + readConfig.get_firefoxpath());
             this.driver = new FirefoxDriver();
             logger.info("Starting Firefox Driver");
-        }
-        else {
+        } else {
             logger.info("Browser not specified");
             System.out.println("Browser not specified");
         }
@@ -75,8 +73,8 @@ public class BaseClass {
 
     @AfterMethod
     public void captureScreen(ITestResult result) {
-        if (result.getStatus()==ITestResult.FAILURE) {
-            Screenshot.get_screenshot(driver,result.getName());
+        if (result.getStatus() == ITestResult.FAILURE) {
+            Screenshot.get_screenshot(driver, result.getName());
         }
     }
 
