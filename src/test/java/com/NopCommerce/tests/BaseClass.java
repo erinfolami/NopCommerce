@@ -2,14 +2,19 @@ package com.NopCommerce.tests;
 
 import com.NopCommerce.pageObjects.LoginPage;
 import com.NopCommerce.utils.ReadConfig;
+import com.NopCommerce.utils.Screenshot;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 
@@ -25,13 +30,14 @@ public class BaseClass {
 
     public WebDriver driver;
     public Logger logger;
-
+    public LoginPage lp;
 
     @BeforeClass
     @Parameters("browser")
     public void setup(String br) {
+
         this.logger = Logger.getLogger("test");
-        PropertyConfigurator.configure("log4j.properties");
+        PropertyConfigurator.configure("./src/main/resources/config/log4j.properties");
 
         if (br.equals("chrome")) {
             ///System.getProperty("user.dir")  gets the full path of project directory
@@ -61,7 +67,25 @@ public class BaseClass {
     public void before_method() {
         driver.get(base_url);
         logger.info("Url is opened......");
-        LoginPage lp = new LoginPage(driver);
+        lp = new LoginPage(driver);
         lp.login(useremail, password);
+        logger.info("Logged in");
     }
+
+
+    @AfterMethod
+    public void captureScreen(ITestResult result) {
+        if (result.getStatus()==ITestResult.FAILURE) {
+            Screenshot.get_screenshot(driver,result.getName());
+        }
+    }
+
+
+    @AfterMethod
+    public void logout_after_method() {
+        lp.logout();
+        logger.info("Logout Out");
+    }
+
+
 }

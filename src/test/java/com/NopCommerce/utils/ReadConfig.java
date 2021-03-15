@@ -8,7 +8,7 @@ public class ReadConfig {
     private Properties pro;
 
     public ReadConfig() {
-        File src = new File("./src/main/java/com/NopCommerce/config/config.properties");
+        File src = new File("./src/main/resources/config/config.properties");
         try {
             FileInputStream fis = new FileInputStream(src);
             this.pro = new Properties();
