@@ -56,18 +56,11 @@ public class BaseClass {
 
     }
 
-    @AfterClass
-    public void tearDown() {
-        driver.quit();
-    }
-
     @BeforeMethod
     public void before_method() {
         driver.get(base_url);
         logger.info("Url is opened......");
         lp = new LoginPage(driver);
-        lp.login(useremail, password);
-        logger.info("Logged in");
     }
 
 
@@ -78,11 +71,15 @@ public class BaseClass {
         }
     }
 
+//    @AfterMethod
+//    public void logout_after_method() {
+//        lp.logout();
+//        logger.info("Logout Out");
+//    }
 
-    @AfterMethod
-    public void logout_after_method() {
-        lp.logout();
-        logger.info("Logout Out");
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
     }
 
 
