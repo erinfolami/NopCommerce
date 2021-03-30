@@ -4,13 +4,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-
-public class AddNewCustomerTest extends BaseClass{
+public class AddNewCustomerTest extends BaseClass {
 
     @Test
     public void AddNewCustomer() throws InterruptedException {
         logger.info("AddNewCustomer test started");
-        lp.login("admin@yourstore.com","admin");
+        lp.login("admin@yourstore.com", "admin");
         addCustomer.clickOnMenuBar();
         addCustomer.clickOncustomersMenu();
         addCustomer.lnkCustomersMenuItem();
@@ -28,11 +27,10 @@ public class AddNewCustomerTest extends BaseClass{
         logger.info("Validation Started");
 
         String AlertTxt = addCustomer.getAlertTxt();
-        if (AlertTxt.contains("The new customer has been added successfully.")){
+        if (AlertTxt.contains("The new customer has been added successfully.")) {
             Assert.assertTrue(true);
             logger.info("Test passed");
-        }
-        else{
+        } else {
             logger.info("AddNewCustomer test failed");
             Assert.assertTrue(false);
         }

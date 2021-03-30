@@ -155,6 +155,6 @@ public class AddNewCustomerPage {
     }
 
     public String getAlertTxt() {
-       return alert.getText();
+        return alert.getText();
     }
 }
