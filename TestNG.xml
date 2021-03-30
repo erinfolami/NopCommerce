@@ -9,7 +9,8 @@
     <test name="Chrome Test">
         <parameter name="browser" value="chrome" />
         <classes>
-           <class name = "com.NopCommerce.tests.LoginTest" />
+<!--           <class name = "com.NopCommerce.tests.LoginTest" />-->
+                <class name="com.NopCommerce.tests.AddNewCustomerTest" />
         </classes>
     </test>
 

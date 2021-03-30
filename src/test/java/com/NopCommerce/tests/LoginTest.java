@@ -15,8 +15,8 @@ public class LoginTest extends BaseClass {
         logger.info("Login test started");
         lp.login(useremail, password);
         String expected_title = "Dashboard / nopCommerce administration";
-        Thread.sleep(2000);
 
+        logger.info("Validation Started");
         if (driver.getTitle().equals(expected_title)) {
             Assert.assertTrue(true);
             logger.info("Login test passed");

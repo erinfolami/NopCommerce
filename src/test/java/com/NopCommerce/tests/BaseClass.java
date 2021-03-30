@@ -1,9 +1,11 @@
 package com.NopCommerce.tests;
 
+import com.NopCommerce.pageObjects.AddNewCustomerPage;
 import com.NopCommerce.pageObjects.LoginPage;
 import com.NopCommerce.utils.ReadConfig;
 import com.NopCommerce.utils.Screenshot;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -15,6 +17,7 @@ import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 
@@ -31,11 +34,11 @@ public class BaseClass {
     public WebDriver driver;
     public Logger logger;
     public LoginPage lp;
+    public AddNewCustomerPage addCustomer;
 
     @BeforeClass
     @Parameters("browser")
     public void setup(String br) {
-
         this.logger = Logger.getLogger("test");
         PropertyConfigurator.configure("./src/main/resources/config/log4j.properties");
 
@@ -53,6 +56,10 @@ public class BaseClass {
             System.out.println("Browser not specified");
         }
 
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        this.lp = new LoginPage(driver);
+        this.addCustomer = new AddNewCustomerPage(driver);
 
     }
 
@@ -60,7 +67,6 @@ public class BaseClass {
     public void before_method() {
         driver.get(base_url);
         logger.info("Url is opened......");
-        lp = new LoginPage(driver);
     }
 
 
@@ -71,15 +77,21 @@ public class BaseClass {
         }
     }
 
-//    @AfterMethod
-//    public void logout_after_method() {
-//        lp.logout();
-//        logger.info("Logout Out");
-//    }
 
     @AfterClass
     public void tearDown() {
         driver.quit();
+    }
+
+
+    public static String randomstring(){
+        String generateString = RandomStringUtils.randomAlphabetic(6);
+        return generateString;
+    }
+
+    public static String randomNum(){
+        String generateNum = RandomStringUtils.random(6);
+        return generateNum;
     }
 
 
